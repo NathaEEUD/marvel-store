@@ -14,10 +14,6 @@ export const marvelApi = axios.create({
   }
 })
 
-export const customApi = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL
-})
-
 export function serverSideConfig() {
   const ts = Number(new Date())
   const md5Hash =
@@ -30,4 +26,8 @@ export function serverSideConfig() {
       offset: 0
     }
   }
+}
+
+export const customApi = {
+  comics: `${process.env.NEXT_PUBLIC_API_URL}/comics`
 }
