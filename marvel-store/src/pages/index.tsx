@@ -8,6 +8,8 @@ import { dehydrate } from 'react-query/hydration'
 import { defaultQueryFn } from '@features/comic/queries'
 import { Card } from '@molecules/card/Card'
 import { Container, Grid } from '@chakra-ui/react'
+import { Header } from '@organisms/header/Header'
+import { Footer } from '@organisms/footer/Footer'
 
 export const getStaticProps: GetStaticProps = async () => {
   const queryClient = new QueryClient()
@@ -34,22 +36,24 @@ const Home: NextPage = () => {
   const { data } = useGetComics(queryParams)
 
   return (
-    <div>
+    <>
       <Head>
-        <title>Marvel Store</title>
+        <title>Marvel Store | Home</title>
         <meta content="The awesome Marvel Store" name="description" />
         <link href="/favicon.ico" rel="icon" />
       </Head>
 
-      <h1>Marvel Store</h1>
+      <Header />
 
-      <Container maxW="container.xl" mb={4} mt={4}>
+      <Container maxW="container.xl" mb={12} mt={12}>
         <Grid gap={8} templateColumns={`repeat(4, 1fr)`}>
           {data &&
             data?.results.map(comic => <Card key={comic.id} {...comic} />)}
         </Grid>
       </Container>
-    </div>
+
+      <Footer />
+    </>
   )
 }
 

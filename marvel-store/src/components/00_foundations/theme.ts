@@ -14,7 +14,8 @@ const styles = {
       boxSizing: 'border-box'
     },
     'html, body': {
-      boxSizing: 'border-box'
+      boxSizing: 'border-box',
+      minHeight: '100vh'
     }
   }
 }
