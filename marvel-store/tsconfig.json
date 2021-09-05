@@ -16,6 +16,7 @@
     "downlevelIteration": true,
     "baseUrl": "src",
     "paths": {
+      "@services/*": ["services/*"],
       "@features/*": ["features/*"],
       "@foundations/*": ["components/00_foundations/*"],
       "@atoms/*": ["components/01_atoms/*"],
