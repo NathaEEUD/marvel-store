@@ -6,6 +6,8 @@ import React from 'react'
 import { QueryClient } from 'react-query'
 import { dehydrate } from 'react-query/hydration'
 import { defaultQueryFn } from '@features/comic/queries'
+import { Card } from '@molecules/card/Card'
+import { Container, Grid } from '@chakra-ui/react'
 
 export const getStaticProps: GetStaticProps = async () => {
   const queryClient = new QueryClient()
@@ -40,7 +42,13 @@ const Home: NextPage = () => {
       </Head>
 
       <h1>Marvel Store</h1>
-      {data && JSON.stringify(data)}
+
+      <Container maxW="container.xl" mb={4} mt={4}>
+        <Grid gap={8} templateColumns={`repeat(4, 1fr)`}>
+          {data &&
+            data?.results.map(comic => <Card key={comic.id} {...comic} />)}
+        </Grid>
+      </Container>
     </div>
   )
 }

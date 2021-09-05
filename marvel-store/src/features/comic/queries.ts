@@ -2,7 +2,7 @@ import { customApi } from '@services/api'
 import axios from 'axios'
 import { useQuery } from 'react-query'
 
-import { IQueryParams } from './types'
+import { IComicsResponse, IQueryParams } from './types'
 
 export const comicKeys = {
   all: ['comics'] as const,
@@ -27,7 +27,7 @@ export const useGetComics = (queryParams: IQueryParams) => {
     page: queryParams.page
   }
 
-  return useQuery(
+  return useQuery<IComicsResponse>(
     comicKeys.list(apiParams),
     () => fetchComics(apiUrl, apiParams),
     {

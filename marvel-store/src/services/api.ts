@@ -4,7 +4,7 @@ import md5 from 'md5'
 const marvelPublicKey = process.env.NEXT_PUBLIC_MARVEL_API_KEY
 const marvelPrivateKey = process.env.PRIVATE_MARVEL_API_KEY
 
-export const marvelApiLimit = 10
+export const marvelApiLimit = 12
 
 export const marvelApi = axios.create({
   baseURL: process.env.NEXT_PUBLIC_MARVEL_API_URL,
