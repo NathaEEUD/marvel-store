@@ -8,7 +8,7 @@ type Props = IComicResult
 export const Card: React.FC<Props> = ({ id, title, thumbnail, price }) => {
   return (
     <NextLink passHref href={`/${id}`}>
-      <VStack cursor="pointer" spacing={6} w="100%">
+      <VStack as="a" spacing={6} w="100%">
         <AspectRatio
           boxShadow="0 26px 24px rgb(0 0 0 / 40%)"
           ratio={2 / 3}

@@ -1,12 +1,12 @@
 import { Box, Center } from '@chakra-ui/react'
 import React from 'react'
-import Link from 'next/link'
+import NextLink from 'next/link'
 
 export const Header: React.FC = () => {
   return (
     <Center as="header" bg="secondary" h="52px" w="100%">
-      <Link href="/">
-        <Box cursor="pointer">
+      <NextLink passHref href="/">
+        <Box as="a">
           <svg height="52" width="130" xmlns="http://www.w3.org/2000/svg">
             <rect fill="#EC1D24" height="100%" width="100%" />
             <path
@@ -20,7 +20,7 @@ export const Header: React.FC = () => {
             />
           </svg>
         </Box>
-      </Link>
+      </NextLink>
     </Center>
   )
 }
