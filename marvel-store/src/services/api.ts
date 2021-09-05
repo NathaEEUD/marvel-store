@@ -29,5 +29,6 @@ export function serverSideConfig() {
 }
 
 export const customApi = {
-  comics: `${process.env.NEXT_PUBLIC_API_URL}/comics`
+  comics: `${process.env.NEXT_PUBLIC_API_URL}/comics`,
+  characters: `${process.env.NEXT_PUBLIC_API_URL}/characters`
 }
