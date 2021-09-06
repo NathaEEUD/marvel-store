@@ -1,16 +1,23 @@
 import type { GetStaticProps, NextPage } from 'next'
 
-import { comicKeys, IQueryParams, useGetComics } from '@features/comic'
+import {
+  comicKeys,
+  ComicsActionKind,
+  IQueryParams,
+  useComics,
+  useGetComics
+} from '@features/comic'
 import Head from 'next/head'
 import React from 'react'
 import { QueryClient } from 'react-query'
 import { dehydrate } from 'react-query/hydration'
 import { defaultQueryFn } from '@features/comic/queries'
 import { Card } from '@molecules/card/Card'
-import { Container, Grid, VStack } from '@chakra-ui/react'
+import { Container, Grid, Skeleton, VStack } from '@chakra-ui/react'
 import { Header } from '@organisms/header/Header'
 import { Footer } from '@organisms/footer/Footer'
 import { Filter } from '@organisms/filter/Filter'
+import { Pagination } from '@organisms/pagination/Pagination'
 
 export const getStaticProps: GetStaticProps = async () => {
   const queryClient = new QueryClient()
@@ -29,12 +36,27 @@ export const getStaticProps: GetStaticProps = async () => {
 }
 
 const Home: NextPage = () => {
-  const queryParams: IQueryParams = {
-    titleStartsWith: '',
-    page: 0
+  const { state, dispatch } = useComics()
+
+  const { data, isLoading } = useGetComics(state)
+
+  const handlePreviousPage = () => {
+    if (state.page > 0) {
+      dispatch({
+        type: ComicsActionKind.UPDATE_PAGE,
+        payload: state.page - 1
+      })
+    }
   }
 
-  const { data } = useGetComics(queryParams)
+  const handleNextPage = () => {
+    if (data?.total_pages && state.page < data?.total_pages) {
+      dispatch({
+        type: ComicsActionKind.UPDATE_PAGE,
+        payload: state.page + 1
+      })
+    }
+  }
 
   return (
     <>
@@ -49,10 +71,28 @@ const Home: NextPage = () => {
       <Container maxW="container.xl" mb={12} mt={12}>
         <VStack spacing={8}>
           <Filter />
-          <Grid gap={8} templateColumns={`repeat(4, 1fr)`}>
-            {data &&
-              data?.results.map(comic => <Card key={comic.id} {...comic} />)}
-          </Grid>
+
+          <Skeleton
+            h="100%"
+            isLoaded={!isLoading}
+            maxH={!isLoading ? '100%' : '100vh'}
+            // minH={!isLoading ? '100%' : '100vh'}
+            minH="100vh"
+            overflow="hidden"
+            w="100%"
+          >
+            <Grid gap={8} templateColumns={`repeat(4, 1fr)`}>
+              {data &&
+                data?.results.map(comic => <Card key={comic.id} {...comic} />)}
+            </Grid>
+          </Skeleton>
+
+          <Pagination
+            handleNextPage={handleNextPage}
+            handlePreviousPage={handlePreviousPage}
+            pageIndex={state.page}
+            totalPages={data?.total_pages || 0}
+          />
         </VStack>
       </Container>
 
