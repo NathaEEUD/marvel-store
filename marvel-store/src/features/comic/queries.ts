@@ -23,8 +23,9 @@ export const fetchComics = async (
 export const useGetComics = (queryParams: IQueryParams) => {
   const apiUrl = customApi.comics
   const apiParams: IQueryParams = {
+    page: queryParams.page,
     titleStartsWith: queryParams.titleStartsWith,
-    page: queryParams.page
+    characterId: queryParams.characterId
   }
 
   return useQuery<IComicsResponse>(
@@ -41,8 +42,9 @@ export const useGetComics = (queryParams: IQueryParams) => {
 export const defaultQueryFn = async () => {
   const apiUrl = customApi.comics
   const apiParams: IQueryParams = {
+    page: 0,
     titleStartsWith: '',
-    page: 0
+    characterId: 0
   }
 
   const response = await fetchComics(apiUrl, apiParams)

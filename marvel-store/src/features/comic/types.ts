@@ -1,8 +1,9 @@
 export interface IQueryParams {
   orderBy?: string
   offset?: number
-  titleStartsWith: string
   page: number
+  titleStartsWith: string
+  characterId: number
 }
 
 export interface IComicsResponse {

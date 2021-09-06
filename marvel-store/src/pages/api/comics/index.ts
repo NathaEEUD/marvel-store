@@ -6,14 +6,18 @@ import { IComicResult, IComicsResponse, IQueryParams } from '@features/comic'
 const allComics = async (req: NextApiRequest, res: NextApiResponse) => {
   console.log('API allComics req.query ::: ', req.query)
 
-  const { titleStartsWith, page } = req.query
-  const MARVEL_COMICS_URL = `${process.env.NEXT_PUBLIC_MARVEL_API_URL}/comics`
+  const { page, titleStartsWith, characterId } = req.query
+  let MARVEL_COMICS_URL = `${process.env.NEXT_PUBLIC_MARVEL_API_URL}/comics`
   let params: Partial<IQueryParams> = {
     orderBy: '-modified',
     offset: marvelApiLimit * +page || 0
   }
 
   const serverSideParams = serverSideConfig()
+
+  if (+characterId !== 0) {
+    MARVEL_COMICS_URL = `${process.env.NEXT_PUBLIC_MARVEL_API_URL}/characters/${characterId}/comics`
+  }
 
   if (titleStartsWith) {
     params = { ...params, titleStartsWith: titleStartsWith.toString() }

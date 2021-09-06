@@ -22,8 +22,9 @@ import { Pagination } from '@organisms/pagination/Pagination'
 export const getStaticProps: GetStaticProps = async () => {
   const queryClient = new QueryClient()
   const params: IQueryParams = {
+    page: 0,
     titleStartsWith: '',
-    page: 0
+    characterId: 0
   }
 
   await queryClient.prefetchQuery(comicKeys.list(params), defaultQueryFn)
