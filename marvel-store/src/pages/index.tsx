@@ -7,9 +7,10 @@ import { QueryClient } from 'react-query'
 import { dehydrate } from 'react-query/hydration'
 import { defaultQueryFn } from '@features/comic/queries'
 import { Card } from '@molecules/card/Card'
-import { Container, Grid } from '@chakra-ui/react'
+import { Container, Grid, VStack } from '@chakra-ui/react'
 import { Header } from '@organisms/header/Header'
 import { Footer } from '@organisms/footer/Footer'
+import { Filter } from '@organisms/filter/Filter'
 
 export const getStaticProps: GetStaticProps = async () => {
   const queryClient = new QueryClient()
@@ -46,10 +47,13 @@ const Home: NextPage = () => {
       <Header />
 
       <Container maxW="container.xl" mb={12} mt={12}>
-        <Grid gap={8} templateColumns={`repeat(4, 1fr)`}>
-          {data &&
-            data?.results.map(comic => <Card key={comic.id} {...comic} />)}
-        </Grid>
+        <VStack spacing={8}>
+          <Filter />
+          <Grid gap={8} templateColumns={`repeat(4, 1fr)`}>
+            {data &&
+              data?.results.map(comic => <Card key={comic.id} {...comic} />)}
+          </Grid>
+        </VStack>
       </Container>
 
       <Footer />
