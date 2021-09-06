@@ -16,6 +16,7 @@
     "downlevelIteration": true,
     "baseUrl": "src",
     "paths": {
+      "@utils/*": ["utils/*"],
       "@services/*": ["services/*"],
       "@features/*": ["features/*"],
       "@foundations/*": ["components/00_foundations/*"],
@@ -24,6 +25,6 @@
       "@organisms/*": ["components/03_organisms/*"],
     },
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.js", "**/*.ts", "**/*.tsx", "src/utils/debounce.js"],
   "exclude": ["node_modules"]
 }
