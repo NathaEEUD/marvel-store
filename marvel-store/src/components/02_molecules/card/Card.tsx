@@ -1,7 +1,6 @@
 import { AspectRatio, Heading, Text, VStack } from '@chakra-ui/react'
 import { IComicResult } from '@features/comic'
 import NextImage from 'next/image'
-import NextLink from 'next/link'
 import React from 'react'
 
 type Props = IComicResult
@@ -27,37 +26,35 @@ const toBase64 = (str: string) =>
 
 export const Card: React.FC<Props> = ({ id, title, thumbnail, price }) => {
   return (
-    <NextLink passHref href={`/${id}`}>
-      <VStack as="a" spacing={6} w="100%">
-        <AspectRatio
-          boxShadow="0 26px 24px rgb(0 0 0 / 40%)"
-          ratio={2 / 3}
-          w="100%"
-        >
-          <NextImage
-            alt={title}
-            blurDataURL={`data:image/svg+xml;base64,${toBase64(
-              shimmer(700, 475)
-            )}`}
-            layout="fill"
-            placeholder="blur"
-            src={`${thumbnail.path}.${thumbnail.extension}`}
-          />
-        </AspectRatio>
-        <VStack
-          alignItems="flex-start"
-          h="100%"
-          justifyContent="space-between"
-          spacing={2}
-          w="100%"
-        >
-          <Heading as="h3" size="md">
-            {title}
-          </Heading>
+    <VStack spacing={6} w="100%">
+      <AspectRatio
+        boxShadow="0 26px 24px rgb(0 0 0 / 40%)"
+        ratio={2 / 3}
+        w="100%"
+      >
+        <NextImage
+          alt={title}
+          blurDataURL={`data:image/svg+xml;base64,${toBase64(
+            shimmer(700, 475)
+          )}`}
+          layout="fill"
+          placeholder="blur"
+          src={`${thumbnail.path}.${thumbnail.extension}`}
+        />
+      </AspectRatio>
+      <VStack
+        alignItems="flex-start"
+        h="100%"
+        justifyContent="space-between"
+        spacing={2}
+        w="100%"
+      >
+        <Heading as="h3" fontSize={{ base: 'sm', lg: 'md' }}>
+          {title}
+        </Heading>
 
-          <Text fontSize="sm">{price} USD</Text>
-        </VStack>
+        <Text fontSize="sm">{price} USD</Text>
       </VStack>
-    </NextLink>
+    </VStack>
   )
 }

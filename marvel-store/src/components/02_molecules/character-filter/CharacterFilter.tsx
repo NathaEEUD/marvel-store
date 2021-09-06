@@ -1,5 +1,5 @@
 import { CharacterLink } from '@atoms/character-link/CharacterLink'
-import { HStack } from '@chakra-ui/react'
+import { Wrap, WrapItem } from '@chakra-ui/react'
 import { IQueryParams } from '@features/character'
 import React from 'react'
 
@@ -20,13 +20,12 @@ export const CharacterFilter: React.FC = () => {
   ]
 
   return (
-    <HStack w="100%">
+    <Wrap justify="center" w="100%">
       {characterFilters.map(characterFilter => (
-        <CharacterLink
-          key={characterFilter.nameStartsWith}
-          name={characterFilter.nameStartsWith}
-        />
+        <WrapItem key={characterFilter.nameStartsWith}>
+          <CharacterLink name={characterFilter.nameStartsWith} />
+        </WrapItem>
       ))}
-    </HStack>
+    </Wrap>
   )
 }

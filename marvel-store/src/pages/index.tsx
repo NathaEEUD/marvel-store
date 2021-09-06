@@ -85,12 +85,18 @@ const Home: NextPage = () => {
             h="100%"
             isLoaded={!isLoading}
             maxH={!isLoading ? '100%' : '100vh'}
-            // minH={!isLoading ? '100%' : '100vh'}
             minH="100vh"
             overflow="hidden"
             w="100%"
           >
-            <Grid gap={8} templateColumns={`repeat(4, 1fr)`}>
+            <Grid
+              gap={8}
+              templateColumns={{
+                base: 'repeat(2, 1fr)',
+                md: 'repeat(3, 1fr)',
+                lg: 'repeat(4, 1fr)'
+              }}
+            >
               {data &&
                 data?.results.map(comic => <Card key={comic.id} {...comic} />)}
             </Grid>
