@@ -5,6 +5,7 @@ import React from 'react'
 import theme from '@foundations/theme'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
+import { ComicsProvider } from '@features/comic'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient()
@@ -12,7 +13,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
-        <Component {...pageProps} />
+        <ComicsProvider>
+          <Component {...pageProps} />
+        </ComicsProvider>
         <ReactQueryDevtools />
       </QueryClientProvider>
     </ChakraProvider>
