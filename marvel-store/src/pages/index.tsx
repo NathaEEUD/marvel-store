@@ -42,6 +42,10 @@ const Home: NextPage = () => {
   const { data, isLoading } = useGetComics(state)
 
   const handlePreviousPage = () => {
+    const header = document.querySelector('header')
+
+    header?.scrollIntoView({ behavior: 'smooth' })
+
     if (state.page > 0) {
       dispatch({
         type: ComicsActionKind.UPDATE_PAGE,
@@ -51,6 +55,10 @@ const Home: NextPage = () => {
   }
 
   const handleNextPage = () => {
+    const header = document.querySelector('header')
+
+    header?.scrollIntoView({ behavior: 'smooth' })
+
     if (data?.total_pages && state.page < data?.total_pages) {
       dispatch({
         type: ComicsActionKind.UPDATE_PAGE,
