@@ -58,7 +58,7 @@ const allComics = async (req: NextApiRequest, res: NextApiResponse) => {
 
     res.status(200).json(comicsResponse)
   } catch (error) {
-    res.status(500).send(error.message)
+    res.status(500).send(error)
   }
 }
 

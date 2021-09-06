@@ -9,12 +9,15 @@ export const Footer: React.FC = () => {
       bottom="0"
       color="tertiary"
       h="42px"
+      p={2}
       position="fixed"
       w="100%"
     >
       <chakra.a
+        fontSize={{ base: 'xs', md: 'md' }}
         href="http://marvel.com\"
         opacity="0.7"
+        textAlign="center"
         textDecoration="underline"
       >
         Data provided by Marvel. © 2021 MARVEL

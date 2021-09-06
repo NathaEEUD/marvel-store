@@ -38,7 +38,7 @@ const characterInfo = async (req: NextApiRequest, res: NextApiResponse) => {
 
       res.status(200).json(characterResponse)
     } catch (error) {
-      res.status(500).send(error.message)
+      res.status(500).send(error)
     }
   } else {
     res.status(500).send('nameStartsWith is required')
